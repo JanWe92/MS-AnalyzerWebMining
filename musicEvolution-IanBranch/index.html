@@ -58,22 +58,25 @@
     <hr />
 
     <div class="container">
-        <div class="filterControls" id="viewSelections">
-            <select id="viewSelect1">
-                <option selected>Waveform</option>
-                <option>Location</option>
-                <option>Lyrics</option>
-                <option>Subgenres</option>
-                <option>OverTime</option>
-            </select>
-            <select id="viewSelect2">
-                <option>Waveform</option>
-                <option>Location</option>
-                <option>Lyrics</option>
-                <option>Subgenres</option>
-                <option selected>OverTime</option>
-            </select>
+        <div class="row">
+            <div class="filterControls col-sm-12" id="viewSelections">
+                <select id="viewSelect1">
+                    <option selected>Waveform</option>
+                    <!--<option>Location</option>-->
+                    <option>Lyrics</option>
+                    <!--<option>Subgenres</option>-->
+                    <option>Attributes</option>
+                </select>
+                <select id="viewSelect2">
+                    <option>Waveform</option>
+                    <!--<option>Location</option>-->
+                    <option>Lyrics</option>
+                    <!--<option>Subgenres</option>-->
+                    <option selected>Attributes</option>
+                </select>
+            </div>
         </div>
+
         <div class="row">
             <div id="views" ng-controller="viewController">
 
@@ -136,8 +139,10 @@
                     </div>
                 </div>
                 <div id="rangeContainer">
-                    <div id="topRangeText"><span id="topStart">1960</span><span>-</span><span id="topEnd">2010</span><!--<span>&ensp;&ensp; Current(</span><span id="topCurrent">1960</span><span>)</span>--></div>
-                    <div id="bottomRangeText"><span id="bottomStart">1960</span><span>-</span><span id="bottomEnd">2010</span><!--<span>&ensp;&ensp; Current(</span><span id="bottomCurrent">1960</span><span>)</span>--></div>
+                    <div id="topRangeText"><span id="topStart">1960</span><span>-</span><span id="topEnd">2010</span>
+                        <!--<span>&ensp;&ensp; Current(</span><span id="topCurrent">1960</span><span>)</span>--></div>
+                    <div id="bottomRangeText"><span id="bottomStart">1960</span><span>-</span><span id="bottomEnd">2010</span>
+                        <!--<span>&ensp;&ensp; Current(</span><span id="bottomCurrent">1960</span><span>)</span>--></div>
                 </div>
             </div>
         </div>
