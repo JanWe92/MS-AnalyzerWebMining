@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="infovisApp">
+<html ng-app="epilogApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+
+    <title>Music Evolution</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Specified CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+
+</head>
+<!-- NAVBAR
+================================================== -->
+
+<body>
+    <div class="navbar-wrapper">
+        <div class="container">
+
+            <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="navbar-brand">Music Evolution</div>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--==================================================-->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+
+
+    <!--Angular templating-->
+    <div class="songData" ng-include src="'partial/meta.html'"></div>
+    <hr />
+
+    <div class="container">
+        <div class="filterControls" id="viewSelections">
+            <select id="viewSelect1">
+                <option selected>Waveform</option>
+                <option>Location</option>
+                <option>Lyrics</option>
+                <option>Subgenres</option>
+                <option>OverTime</option>
+            </select>
+            <select id="viewSelect2">
+                <option>Waveform</option>
+                <option>Location</option>
+                <option>Lyrics</option>
+                <option>Subgenres</option>
+                <option selected>OverTime</option>
+            </select>
+        </div>
+        <div class="row">
+            <div id="views" ng-controller="viewController">
+
+                <div class="col-sm-6">
+                    <div class="infoView" id="view1">
+                        <div ng-include src="'partial/waveform.html'"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="infoView" id="view2">
+                        <div ng-include src="'partial/overTime.html'"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+
+            <div class="timeline">
+                <div id="playbar">
+                    <div id="topRange" class="bound"></div>
+                    <div id="topLeftBound" class=".boundBarTop"></div>
+                    <!--<div id="playCursorTop"></div>-->
+                    <div id="topRightBound" class=".boundBarTop"></div>
+                    <div class="decadeContainer">
+                        <div id="1960sTop" class="decade"></div>
+                        <!--
+                            -->
+                        <div id="1970sTop" class="decade"></div>
+                        <!--
+                            -->
+                        <div id="1980sTop" class="decade"></div>
+                        <!--
+                            -->
+                        <div id="1990sTop" class="decade"></div>
+                        <!--
+                            -->
+                        <div id="2000sTop" class="decade"></div>
+                    </div>
+                    <div id="bottomRange" class="bound"></div>
+                    <div id="bottomLeftBound" class="boundBarTop"></div>
+                    <!--<div id="playCursorBottom"></div>-->
+                    <div id="bottomRightBound" class="boundBarTop"></div>
+                    <div class="decadeContainerBottom">
+                        <div id="1960sBottom" class="decade"></div>
+                        <!--
+                            -->
+                        <div id="1970sBottom" class="decade"></div>
+                        <!--
+                            -->
+                        <div id="1980sBottom" class="decade"></div>
+                        <!--
+                            -->
+                        <div id="1990sBottom" class="decade"></div>
+                        <!--
+                            -->
+                        <div id="2000sBottom" class="decade"></div>
+                    </div>
+                </div>
+                <div id="rangeContainer">
+                    <div id="topRangeText"><span id="topStart">1960</span><span>-</span><span id="topEnd">2010</span><!--<span>&ensp;&ensp; Current(</span><span id="topCurrent">1960</span><span>)</span>--></div>
+                    <div id="bottomRangeText"><span id="bottomStart">1960</span><span>-</span><span id="bottomEnd">2010</span><!--<span>&ensp;&ensp; Current(</span><span id="bottomCurrent">1960</span><span>)</span>--></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--
+    <div class="timelineControls">
+        <div id="start" class="button">Start</div>
+        <div id="back" class="button">Back</div>
+        <div id="play" class="button">Play</div>
+        <div id="stop" class="button" onclick="stopButton()">Stop</div>
+        <div id="next" class="button">Next</div>
+        <div id="end" class="button">End</div>
+    </div>
+
+-->
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+
+    </footer>
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/activator.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+    <script src="js/playcontrol.js"></script>
+
+    <!--D3.js-->
+    <script src="lib/d3.min.js"></script>
+
+    <!--D3 Cloudlayout-->
+    <script src="js/d3.layout.cloud.js"></script>
+
+    <!--Underscore-->
+    <script src="lib/underscore.js"></script>
+
+    <!--Simple Statistics-->
+    <script src="lib/simpleStats.js"></script>
+
+    <!--Topo JSON for the map work-->
+    <script src="lib/topojson.js"></script>
+
+    <!--ANGULAR-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
+    <script src="js/app.js"></script>
+
+    <!--Controllers-->
+    <script src="js/mainController.js"></script>
+
+
+
+
+
+    <!--View Selector-->
+
+    <script src="js/viewSelector.js"></script>
+
+</body>
+
+</html>
