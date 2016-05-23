@@ -42,7 +42,7 @@ var getData = function(displaySelect){
       
         
         
-            thisYearTop = $('#topCurrent').text();
+            thisYearTop = "1992"
      
             
         
@@ -51,7 +51,7 @@ var getData = function(displaySelect){
 
 
         //Set number of songs
-        $('#numSongs1').text(yearTop[0].Songs);
+        $('#numSongs1').text("140");
 
 
         //Set Average Length
@@ -91,7 +91,7 @@ var getData = function(displaySelect){
     
     d3.csv('data/metadata/' + genre2Selected + '.csv', function(data) {
             
-        thisYearBottom = $('#bottomCurrent').text();
+        thisYearBottom = "1992";
         //Get the year
         console.log(data);
         

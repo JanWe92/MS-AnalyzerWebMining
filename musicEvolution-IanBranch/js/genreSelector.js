@@ -1,5 +1,5 @@
-var genre1Selected = "Rock";
-var genre2Selected = "Pop";
+var genre1Selected = "Dance and Electronica";
+var genre2Selected = "Pop and Rock";
 
 
 $('#genre1').change(function(){
