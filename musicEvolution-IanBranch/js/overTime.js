@@ -172,7 +172,8 @@ var overtimeGraphs = function () {
             .attr("cy", function (d) {
                 return y(d[1]);
             })
-            .attr("r", 2);
+            .attr("r", 2)
+            .style("fill","#4682b4");
         
     });
 };
