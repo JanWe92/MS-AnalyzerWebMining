@@ -40,7 +40,7 @@ var overtimeGraphs = function () {
         loudnessData.shift();
         for (i = 0; i < loudnessData.length; i++) {
             loudnessData[i] = parseFloat(loudnessData[i]);
-            loudnessData[i] = Math.round(loudnessData[i]);
+      //      loudnessData[i] = Math.round(loudnessData[i]);
         };
 
         //Tempo
