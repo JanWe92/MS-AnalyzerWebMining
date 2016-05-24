@@ -88,6 +88,9 @@ select {
 #attribut2 {
     margin-top: 15px;
 }
+.allDecadesButton{
+    margin-left: 5px;
+}
 #playbar {
     position: absolute;
     display: inline-block;
