@@ -47,7 +47,7 @@ var getData = function(displaySelect){
         
 
         //Set number of songs
-        $('#numSongs1').text(data[0].Songs);
+        $('#numSongs1').text(Math.floor(data[0].Songs * 1));
 
 
         //Set Average Length
@@ -60,20 +60,24 @@ var getData = function(displaySelect){
         //if (seconds < 10){
         //    seconds = "0" + seconds;
         //}
-        $('#averageDur1').text(data[0].Duration);
+
+        var durVal = data[0].Duration;
+        var minutes = Math.floor(durVal / 60);
+        var seconds = Math.floor(durVal % 60);
+        $('#averageDur1').text(minutes + ":" + seconds+" mins");
     
         //Get the Average Loudness
         //var loudArray = _.sortBy((_.pluck(year, 'Loudness')));
         //for(var i=loudArray.length; i--;) loudArray[i] = loudArray[i]|0;
         //var loudMean = (d3.mean(loudArray)).toFixed(2);
-        $('#averageLoud1').text(data[0].Loudness + " dB");
+        $('#averageLoud1').text(Math.floor(data[0].Loudness * 1 ) + " dB");
 
 
         //Get the Average Temp
         //var tempoArray = _.sortBy((_.pluck(year, 'Tempo')));
         //for(var i=tempoArray.length; i--;) tempoArray[i] = tempoArray[i]|0;
         //var tempoMean = (d3.mean(tempoArray)).toFixed(2);
-        $('#averageTempo1').text(data[0].Tempo + " BPM");
+        $('#averageTempo1').text(Math.floor(data[0].Tempo * 1) + " BPM");
     
         //Get the Average Hotness
         //var hotnessArray = _.sortBy((_.pluck(year, 'Hotness')));
@@ -120,7 +124,7 @@ var getData = function(displaySelect){
         //var loudArray = _.sortBy((_.pluck(year, 'Loudness')));
         //for(var i=loudArray.length; i--;) loudArray[i] = loudArray[i]|0;
         //var loudMean = (d3.mean(loudArray)).toFixed(2);
-        var loudsss=Math.floor(data[0].Loudness/ 1.0);
+        var loudsss=Math.floor(data[0].Loudness* 1.0);
         $('#averageLoud2').text(loudsss + " dB");
 
         //Get the Average Temp
@@ -128,7 +132,7 @@ var getData = function(displaySelect){
         //for(var i=tempoArray.length; i--;) tempoArray[i] = tempoArray[i]|0;
         //var tempoMean = (d3.mean(tempoArray)).toFixed(2);
 
-        $('#averageTempo2').text(data[0].Tempo + " BPM");
+        $('#averageTempo2').text(Math.floor(data[0].Tempo * 1 )+ " BPM");
         //Get the Average Hotness
         //var hotnessArray = _.sortBy((_.pluck(year, 'Hotness')));
         //for(var i=hotnessArray.length; i--;) hotnessArray[i] = hotnessArray[i] / 1;
