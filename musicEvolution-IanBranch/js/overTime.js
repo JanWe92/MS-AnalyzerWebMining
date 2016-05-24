@@ -1,408 +1,186 @@
-var overtimeGraphs = function() {
-    $('#durationTime').empty();
-    $('#loudnessTime').empty();
-    $('#tempoTime').empty();
-    $('#hotnessTime').empty();
-    
+var overtimeGraphs = function () {
+    $('#attributesPlot').empty();
+
+    var w = 500,
+        h = 300,
+        pad = 20,
+        left_pad = 100;
+
+    var genreSelect1;
+    genreSelect1 = $("#genre1 option:selected").text();
+
+    //left attribute
+    var attributeSelect1 = $("#attribut1 option:selected").text();
+    //bottom attribute
+    var attributeSelect2 = $("#attribut2 option:selected").text();
+
+
     //Append the canvas'
-    var durationCanvas = d3.select('#durationTime').append('svg')
-                                        .attr("width", "300px")
-                                        .attr("id", "durCanvas")
-                                        .attr("height", "300px")
-                                        .style("display", "block");
+    var attributesCanvas = d3.select('#attributesPlot').append('svg')
+        .attr("width", w)
+        .attr("id", "attrCanvas")
+        .attr("height", h)
+        .style("display", "block");
 
-
-    var loudnessCanvas = d3.select('#loudnessTime').append('svg')
-                                        .attr("width", "300px")
-                                        .attr("id", "loudCanvas")
-                                        .attr("height", "200px")
-                                        .style("display", "block");   
-
-    var tempoCanvas = d3.select('#tempoTime').append('svg')
-                                        .attr("width", "300px")
-                                        .attr("id", "tempoCanvas")
-                                        .attr("height", "200px")
-                                        .style("display", "block");
-
-    var hotnessCanvas = d3.select('#hotnessTime').append('svg')
-                                        .attr("width", "300px")
-                                        .attr("id", "hotCanvas")
-                                        .attr("height", "200px")
-                                        .style("display", "block");
 
     //Append a line for each year Top
-    d3.csv('data/overTime/' + genre1Selected +'.csv', function(error, data) {
+    d3.csv('data/overTime/' + genreSelect1 + '.csv', function (error, data) {
 
         //Get the data in the right formats
         //Duration
         var durationData = _.pluck(data, "Duration");
-        var durLine = [];
-        for (i = 0; i < durationData.length; i++){
-            durationData[i] = durationData[i].split(":");
-            durationData[i] = parseInt(durationData[i][0] * 60) + parseInt(durationData[i][1]);
-            durLine.push({'x':i, 'y':durationData[i]});
+        durationData.shift();
+        for (i = 0; i < durationData.length; i++) {
+            durationData[i] = parseFloat(durationData[i])
+            durationData[i] = Math.round(durationData[i]);
         };
-
 
         //Loudness
         var loudnessData = _.pluck(data, "Loudness");
-        var loudLine = [];
-        for (i = 0; i < loudnessData.length; i++){
+        loudnessData.shift();
+        for (i = 0; i < loudnessData.length; i++) {
             loudnessData[i] = parseFloat(loudnessData[i]);
-            loudLine.push({'x':i, 'y':loudnessData[i]});
+            loudnessData[i] = Math.round(loudnessData[i]);
         };
 
         //Tempo
         var tempoData = _.pluck(data, "Tempo");
-        var tempoLine = [];
-        for (i = 0; i < tempoData.length; i++){
+        tempoData.shift();
+        for (i = 0; i < tempoData.length; i++) {
             tempoData[i] = parseFloat(tempoData[i]);
-            tempoLine.push({'x':i, 'y':tempoData[i]});
+            tempoData[i] = Math.round(tempoData[i]);
         };
-
-
 
         //Hotness
         var hotnessData = _.pluck(data, "Hotness");
-        var hotLine = [];
-        for (i = 0; i < hotnessData.length; i++){
+        hotnessData.shift();
+        for (i = 0; i < hotnessData.length; i++) {
             hotnessData[i] = parseFloat(hotnessData[i]);
-            hotLine.push({'x':i, 'y':hotnessData[i]});
+            hotnessData[i] = hotnessData[i] * 100;
+            hotnessData[i] = Math.round(hotnessData[i]);
+        };
+
+        var yearData = _.pluck(data, "Year");
+        yearData.shift();
+
+        var familiarityData = _.pluck(data, "Familiarity");
+        familiarityData.shift();
+        for (i = 0; i < familiarityData.length; i++) {
+            familiarityData[i] = parseFloat(familiarityData[i]);
+            familiarityData[i] = familiarityData[i] * 100;
+            familiarityData[i] = Math.round(familiarityData[i]);
         };
 
 
-        //Plot decades
-        for (dec = 0; dec < 7; dec++){
-            durationCanvas.append("rect")
-                            .attr("width", 50)
-                            .attr("height", 300)
-                            .attr("x", dec * 50)
-                            .attr("fill", function(){
-                                    if (dec % 2 != 0){
-                                        return "white";   
-                                    }else{
-                                        return "lightgrey";
-                                    };
-            });
+        var xmin;
+        var xmax;
+        var xData;
+        switch (attributeSelect2) {
+            case "Duration":
+                xmax = Math.max.apply(Math, durationData);
+                xmin = Math.min.apply(Math, durationData);
+                xData = durationData;
+                break;
+            case "Loudness":
+                xmax = Math.max.apply(Math, loudnessData);
+                xmin = Math.min.apply(Math, loudnessData);
+                xData = loudnessData;
+                break;
+            case "Tempo":
+                xmax = Math.max.apply(Math, tempoData);
+                xmin = Math.min.apply(Math, tempoData);
+                xData = tempoData;
+                break;
+            case "Hotness":
+                xmax = Math.max.apply(Math, hotnessData);
+                xmin = Math.min.apply(Math, hotnessData);
+                xData = hotnessData;
+                break;
+            case "Time":
+                xmax = Math.max.apply(Math, yearData);
+                xmin = Math.min.apply(Math, yearData);
+                xData = yearData;
+                break;
+            case "Familiarity":
+                xmax = Math.max.apply(Math, familiarityData);
+                xmin = Math.min.apply(Math, familiarityData);
+                xData = familiarityData;
+                break;
+        }
 
-            loudnessCanvas.append("rect")
-                            .attr("width", 50)
-                            .attr("height", 300)
-                            .attr("x", dec * 50)
-                            .attr("fill", function(){
-                                    if (dec % 2 != 0){
-                                        return "white";   
-                                    }else{
-                                        return "lightgrey";
-                                    };
-            });
+        var ymin;
+        var ymax;
+        var yData;
+        switch (attributeSelect1) {
+            case "Duration":
+                ymax = Math.max.apply(Math, durationData);
+                ymin = Math.min.apply(Math, durationData);
+                yData = durationData;
+                break;
+            case "Loudness":
+                ymax = Math.max.apply(Math, loudnessData);
+                ymin = Math.min.apply(Math, loudnessData);
+                yData = loudnessData;
+                break;
+            case "Tempo":
+                ymax = Math.max.apply(Math, tempoData);
+                ymin = Math.min.apply(Math, tempoData);
+                yData = tempoData;
+                break;
+            case "Hotness":
+                ymax = Math.max.apply(Math, hotnessData);
+                ymin = Math.min.apply(Math, hotnessData);
+                yData = hotnessData;
+                break;
+            case "Time":
+                ymax = Math.max.apply(Math, yearData);
+                ymin = Math.min.apply(Math, yearData);
+                yData = yearData;
+                break;
+            case "Familiarity":
+                ymax = Math.max.apply(Math, familiarityData);
+                ymin = Math.min.apply(Math, familiarityData);
+                yData = familiarityData;
+                break;
+        }
 
-            tempoCanvas.append("rect")
-                            .attr("width", 50)
-                            .attr("height", 300)
-                            .attr("x", dec * 50)
-                            .attr("fill", function(){
-                                    if (dec % 2 != 0){
-                                        return "white";   
-                                    }else{
-                                        return "lightgrey";
-                                    };
-            });
+        var x = d3.scale.linear().domain([xmin, xmax]).range([left_pad, w - pad]);
+        var y = d3.scale.linear().domain([ymin, ymax]).range([h - pad * 2, pad]);
 
-            hotnessCanvas.append("rect")
-                            .attr("width", 50)
-                            .attr("height", 300)
-                            .attr("x", dec * 50)
-                            .attr("fill", function(){
-                                    if (dec % 2 != 0){
-                                        return "white";   
-                                    }else{
-                                        return "lightgrey";
-                                    };
-            });
-        };
-
-
-        //Duration Graph
-        var durLineFunction = d3.svg.line()
-                            .x(function(d) { return (d.x) * 5; })
-                            .y(function(d) { return 300 - ((d.y) / 2); })
-                            .interpolate("linear");
-
-        var durLineGraph = durationCanvas.append("path")
-                                .attr("d", durLineFunction(durLine))
-                                .attr("stroke", "steelblue")
-                                .attr("stroke-width", 2)
-                                .attr("fill", "none");
-
-        //Loudness Graph
-        var loudLineFunction = d3.svg.line()
-                            .x(function(d) { return (d.x) * 5; })
-                            .y(function(d) { return 10 * (Math.abs(d.y)); })
-                            .interpolate("linear");
-
-        var loudLineGraph = loudnessCanvas.append("path")
-                                .attr("d", loudLineFunction(loudLine))
-                                .attr("stroke", "steelblue")
-                                .attr("stroke-width", 2)
-                                .attr("fill", "none");
-
-        //Tempo Graph
-        var tempoLineFunction = d3.svg.line()
-                            .x(function(d) { return (d.x) * 5; })
-                            .y(function(d) { return (d.y) / 2; })
-                            .interpolate("linear");
-
-        var tempoLineGraph = tempoCanvas.append("path")
-                                .attr("d", tempoLineFunction(tempoLine))
-                                .attr("stroke", "steelblue")
-                                .attr("stroke-width", 2)
-                                .attr("fill", "none");
-
-        //Hotness Graph
-        var hotLineFunction = d3.svg.line()
-                            .x(function(d) { return (d.x) * 5; })
-                            .y(function(d) { return 200 - ((d.y) * 250); })
-                            .interpolate("linear");
-
-        var hotLineGraph = hotnessCanvas.append("path")
-                                .attr("d", hotLineFunction(hotLine))
-                                .attr("stroke", "steelblue")
-                                .attr("stroke-width", 2)
-                                .attr("fill", "none");
+        var xAxis = d3.svg.axis().scale(x).orient("bottom"),
+            yAxis = d3.svg.axis().scale(y).orient("left");
 
 
-        //Play Lines Top
-        var durTimeTop = durationCanvas.append("line")
-                                .attr("x1", 0)
-                                .attr("x2", 0)
-                                .attr("y1", 0)
-                                .attr("y2", 300)
-                                .attr("stroke", "steelblue")
-                                .attr("stroke-width", "3px")
-                                .attr("id", "durTimeTop");
+        attributesCanvas.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0, " + (h - pad) + ")")
+            .call(xAxis);
 
-        var loudTimeTop = loudnessCanvas.append("line")
-                                .attr("x1", 0)
-                                .attr("x2", 0)
-                                .attr("y1", 0)
-                                .attr("y2", 200)
-                                .attr("stroke", "steelblue")
-                                .attr("stroke-width", "3px")
-                                .attr("id", "loudTimeTop");
+        attributesCanvas.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(" + (left_pad - pad) + ", 0)")
+            .call(yAxis);
 
-        var tempoTimeTop = tempoCanvas.append("line")
-                                .attr("x1", 0)
-                                .attr("x2", 0)
-                                .attr("y1", 0)
-                                .attr("y2", 200)
-                                .attr("stroke", "steelblue")
-                                .attr("stroke-width", "3px")
-                                .attr("id", "tempoTimeTop");
-
-        var hotTimeTop = hotnessCanvas.append("line")
-                                .attr("x1", 0)
-                                .attr("x2", 0)
-                                .attr("y1", 0)
-                                .attr("y2", 200)
-                                .attr("stroke", "steelblue")
-                                .attr("stroke-width", "3px")
-                                .attr("id", "hotTimeTop");
-
-    });
-
-    //Append a line for each year Top
-    d3.csv('data/overTime/' + genre2Selected +'.csv', function(error, data) {
-
-        //Get the data in the right formats
-        //Duration
-        var durationData = _.pluck(data, "Duration");
-        var durLine = [];
-
-        for (i = 0; i < durationData.length; i++){
-
-            if (durationData[i].contains(":")){
-                durationData[i] = durationData[i].split(":");
-                durationData[i] = parseInt(durationData[i][0] * 60) + parseInt(durationData[i][1]);
-            };
-            durLine.push({'x':i, 'y':durationData[i]});
-        };
-
-
-        //Loudness
-        var loudnessData = _.pluck(data, "Loudness");
-        var loudLine = [];
-        for (i = 0; i < loudnessData.length; i++){
-            loudnessData[i] = parseFloat(loudnessData[i]);
-            loudLine.push({'x':i, 'y':loudnessData[i]});
-        };
-
-        //Tempo
-        var tempoData = _.pluck(data, "Tempo");
-        var tempoLine = [];
-        for (i = 0; i < tempoData.length; i++){
-            tempoData[i] = parseFloat(tempoData[i]);
-            tempoLine.push({'x':i, 'y':tempoData[i]});
-        };
-
-
-
-        //Hotness
-        var hotnessData = _.pluck(data, "Hotness");
-        var hotLine = [];
-        for (i = 0; i < hotnessData.length; i++){
-            hotnessData[i] = parseFloat(hotnessData[i]);
-            hotLine.push({'x':i, 'y':hotnessData[i]});
-        };
-
-        //Duration Graph
-        var durLineFunction = d3.svg.line()
-                            .x(function(d) { return (d.x) * 5; })
-                            .y(function(d) { return 300 - ((d.y) / 2); })
-                            .interpolate("linear");
-
-        var durLineGraph = durationCanvas.append("path")
-                                .attr("d", durLineFunction(durLine))
-                                .attr("stroke", "#1B5C1B")
-                                .attr("stroke-width", 2)
-                                .attr("fill", "none");
-
-        //Loudness Graph
-        var loudLineFunction = d3.svg.line()
-                            .x(function(d) { return (d.x) * 5; })
-                            .y(function(d) { return 10 * (Math.abs(d.y)); })
-                            .interpolate("linear");
-
-        var loudLineGraph = loudnessCanvas.append("path")
-                                .attr("d", loudLineFunction(loudLine))
-                                .attr("stroke", "#1B5C1B")
-                                .attr("stroke-width", 2)
-                                .attr("fill", "none");
-
-        //Tempo Graph
-        var tempoLineFunction = d3.svg.line()
-                            .x(function(d) { return (d.x) * 5; })
-                            .y(function(d) { return (d.y) / 2; })
-                            .interpolate("linear");
-
-        var tempoLineGraph = tempoCanvas.append("path")
-                                .attr("d", tempoLineFunction(tempoLine))
-                                .attr("stroke", "#1B5C1B")
-                                .attr("stroke-width", 2)
-                                .attr("fill", "none");
-
-        //Hotness Graph
-        var hotLineFunction = d3.svg.line()
-                            .x(function(d) { return (d.x) * 5; })
-                            .y(function(d) { return 200 - ((d.y) * 250); })
-                            .interpolate("linear");
-
-        var hotLineGraph = hotnessCanvas.append("path")
-                                .attr("d", hotLineFunction(hotLine))
-                                .attr("stroke", "#1B5C1B")
-                                .attr("stroke-width", 2)
-                                .attr("fill", "none");
-
-
-
-
-        //Play Lines Bottom
-        var durTimeBottom = durationCanvas.append("line")
-                                .attr("x1", 0)
-                                .attr("x2", 0)
-                                .attr("y1", 0)
-                                .attr("y2", 300)
-                                .attr("stroke", "#1B5C1B")
-                                .attr("stroke-width", "3px")
-                                .attr("id", "durTimeBottom");
-
-        var loudTimeBottom = loudnessCanvas.append("line")
-                                .attr("x1", 0)
-                                .attr("x2", 0)
-                                .attr("y1", 0)
-                                .attr("y2", 200)
-                                .attr("stroke", "#1B5C1B")
-                                .attr("stroke-width", "3px")
-                                .attr("id", "loudTimeBottom");
-
-        var tempoTimeBottom = tempoCanvas.append("line")
-                                .attr("x1", 0)
-                                .attr("x2", 0)
-                                .attr("y1", 0)
-                                .attr("y2", 200)
-                                .attr("stroke", "#1B5C1B")
-                                .attr("stroke-width", "3px")
-                                .attr("id", "tempoTimeBottom");
-
-        var hotTimeBottom = hotnessCanvas.append("line")
-                                .attr("x1", 0)
-                                .attr("x2", 0)
-                                .attr("y1", 0)
-                                .attr("y2", 200)
-                                .attr("stroke", "#1B5C1B")
-                                .attr("stroke-width", "3px")
-                                .attr("id", "hotTimeBottom");
-
+        attributesCanvas.selectAll("circle.datapoint")
+            .data(d3.zip(xData, yData))
+            .enter()
+            .append("circle")
+            .attr("class", "datapoint")
+            .attr("cx", function (d) {
+                return x(d[0]);
+            })
+            .attr("cy", function (d) {
+                return y(d[1]);
+            })
+            .attr("r", 2);
+        
     });
 };
 overtimeGraphs();
 
-var overTimeUpdate = function() {
-    var topCurrent = $('#topCurrent').text();
-    var bottomCurrent = $('#bottomCurrent').text();
-    
-    var topTime = ((parseInt(topCurrent)) - 1960) * 5; 
-    var bottomTime = ((parseInt(bottomCurrent)) - 1960) * 5;
-    
-    //SVG's are 300 wide
-    d3.select("#durTimeTop")
-            .transition()
-            .duration(150)
-            .attr("x1", topTime)
-            .attr("x2", topTime);
-    
-    d3.select("#loudTimeTop")
-            .transition()
-            .duration(150)
-            .attr("x1", topTime)
-            .attr("x2", topTime);
-    
-    d3.selectAll("#tempoTimeTop")
-            .transition()
-            .duration(150)
-            .attr("x1", topTime)
-            .attr("x2", topTime);
-    
-    d3.select("#hotTimeTop")
-            .transition()
-            .duration(150)
-            .attr("x1", topTime)
-            .attr("x2", topTime);
-    
-    //SVG's are 300 wide
-    d3.select("#durTimeBottom")
-            .transition()
-            .duration(150)
-            .attr("x1", bottomTime)
-            .attr("x2", bottomTime);
-    
-    d3.select("#loudTimeBottom")
-            .transition()
-            .duration(150)
-            .attr("x1", bottomTime)
-            .attr("x2", bottomTime);
-    
-    d3.selectAll("#tempoTimeBottom")
-            .transition()
-            .duration(150)
-            .attr("x1", bottomTime)
-            .attr("x2", bottomTime);
-    
-    d3.select("#hotTimeBottom")
-            .transition()
-            .duration(150)
-            .attr("x1", bottomTime)
-            .attr("x2", bottomTime);
-};
-
-overTimeUpdate();
+$('#attribut1').on('change', function(){
+    overtimeGraphs();
+});
+$('#attribut2').on('change', function(){
+    overtimeGraphs();
+});
