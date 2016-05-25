@@ -3,6 +3,15 @@
 ///////////////////////////////////
 
 //Top Waves
+
+
+
+
+
+var wavePlot = function() {
+    
+$('#wave1').empty();
+
 $('#wave1').append('<div id="durationTop" class="waveform"></div>');
 $('#wave1').append('<div id="loudnessTop" class="waveform"></div>');
 $('#wave1').append('<div id="tempoTop" class="waveform"></div>');
@@ -28,12 +37,6 @@ var durationBottom = d3.select('#durationBottom').append("svg").attr("width", "1
 var loudnessBottom = d3.select('#loudnessBottom').append("svg").attr("width", "100%").attr("height", 320);
 var tempoBottom = d3.select('#tempoBottom').append("svg").attr("width", "100%").attr("height", 320);
 var hotnessBottom = d3.select('#hotnessBottom').append("svg").attr("width", "100%").attr("height", 320);
-
-
-
-
-var wavePlot = function() {
-
     
     //Plot the duration values for top
     d3.csv('data/waveform/' + genre1Selected +'/duration.csv', function(data) {
