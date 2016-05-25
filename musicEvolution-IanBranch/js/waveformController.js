@@ -331,14 +331,9 @@ var waveUpdate = function(){
     d3.csv('data/waveform/' + genre1Selected + '/duration.csv', function(data) {
 
         var numSongsTop = parseInt($('#numSongs1').text());
-        var topYear = $('#topCurrent').text();
         
-        var durData = _.where(data, {Year: topYear});
-        delete durData[0]["Year"];
-        
-        var durValues = _.values(durData[0]);
+        var durValues = _.values(data[0]);
         var durationTop = d3.select('#durationTop');
-        var numSongsTop = parseInt($('#numSongs1').text());
         //Update all rects
         durationTop.selectAll("rect")
                 .data(durValues)
@@ -353,12 +348,8 @@ var waveUpdate = function(){
     d3.csv('data/waveform/' + genre2Selected + '/duration.csv', function(data) {
 
         var numSongsBottom = parseInt($('#numSongs2').text());
-        var bottomYear = $('#bottomCurrent').text();
         
-        var durData = _.where(data, {Year: bottomYear});
-        delete durData[0]["Year"];
-        
-        var durValues = _.values(durData[0]);
+        var durValues = _.values(data[0]);
         var durationBottom = d3.select('#durationBottom');
         var numSongsBottom = parseInt($('#numSongs2').text());
         //Update all rects
@@ -372,12 +363,8 @@ var waveUpdate = function(){
     });
     
     d3.csv('data/waveform/' + genre1Selected + '/loudness.csv', function(data) {
-        var topYear = $('#topCurrent').text();
-        
-        var loudData = _.where(data, {Year: topYear});
-        delete loudData[0]["Year"];
-        
-        var loudValues = _.values(loudData[0]);
+       
+        var loudValues = _.values(data[0]);
         var loudTop = d3.select('#loudnessTop');
         var numSongsTop = parseInt($('#numSongs1').text());
         //Update all rects
@@ -392,12 +379,7 @@ var waveUpdate = function(){
     });
     
     d3.csv('data/waveform/' + genre2Selected + '/loudness.csv', function(data) {
-        var bottomYear = $('#bottomCurrent').text();
-        
-        var loudData = _.where(data, {Year: bottomYear});
-        delete loudData[0]["Year"];
-        
-        var loudValues = _.values(loudData[0]);
+        var loudValues = _.values(data[0]);
         var loudBottom = d3.select('#loudnessBottom');
         var numSongsBottom = parseInt($('#numSongs2').text());
         //Update all rects
@@ -412,12 +394,7 @@ var waveUpdate = function(){
     });
     
     d3.csv('data/waveform/' + genre1Selected + '/tempo.csv', function(data) {
-        var topYear = $('#topCurrent').text();
-        
-        var tempoData = _.where(data, {Year: topYear});
-        delete tempoData[0]["Year"];
-        
-        var tempoValues = _.values(tempoData[0]);
+        var tempoValues = _.values(data[0]);
         var tempoTop = d3.select('#tempoTop');
         var numSongsTop = parseInt($('#numSongs1').text());
         //Update all rects
@@ -432,12 +409,7 @@ var waveUpdate = function(){
     });
     
     d3.csv('data/waveform/' + genre2Selected + '/tempo.csv', function(data) {
-        var bottomYear = $('#bottomCurrent').text();
-        
-        var tempoData = _.where(data, {Year: bottomYear});
-        delete tempoData[0]["Year"];
-        
-        var tempoValues = _.values(tempoData[0]);
+        var tempoValues = _.values(data[0]);
         var tempoBottom = d3.select('#tempoBottom');
         var numSongsBottom = parseInt($('#numSongs2').text());
         //Update all rects
@@ -452,12 +424,7 @@ var waveUpdate = function(){
     });
     
     d3.csv('data/waveform/' + genre1Selected +'/hotness.csv', function(data) {
-        var topYear = $('#topCurrent').text();
-        
-        var hotnessData = _.where(data, {Year: topYear});
-        delete hotnessData[0]["Year"];
-        
-        var hotnessValues = _.values(hotnessData[0]);
+        var hotnessValues = _.values(data[0]);
         var hotnessTop = d3.select('#hotnessTop');
         var numSongsTop = parseInt($('#numSongs1').text());
         //Update all rects
@@ -472,12 +439,7 @@ var waveUpdate = function(){
     });
     
     d3.csv('data/waveform/' + genre2Selected + '/hotness.csv', function(data) {
-        var bottomYear = $('#bottomCurrent').text();
-        
-        var hotnessData = _.where(data, {Year: bottomYear});
-        delete hotnessData[0]["Year"];
-        
-        var hotnessValues = _.values(hotnessData[0]);
+        var hotnessValues = _.values(data[0]);
         var hotnessBottom = d3.select('#hotnessBottom');
         var numSongsBottom = parseInt($('#numSongs2').text());
         //Update all rects
