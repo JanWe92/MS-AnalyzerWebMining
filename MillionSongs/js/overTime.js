@@ -1,7 +1,17 @@
-    var color = "#4682b4";
+   
+
+
+var color = "#4682b4";
 
     var genreSelect1;
     genreSelect1 = $("#genre1 option:selected").text();
+
+var setCurrentGenre = function(genre){
+    
+    if((color=="#4682b4"&&genre=="genre1")||(color=="#006400"&&genre=="genre2")){    
+    genreSelect1 = $("#"+genre+ " option:selected").text();
+    }
+};
 
     var overtimeGraphs = function () {
         $('#attributesPlot').empty();
