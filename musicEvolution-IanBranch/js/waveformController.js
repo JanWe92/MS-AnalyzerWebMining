@@ -51,9 +51,8 @@ var wavePlot = function() {
             .attr("width", 3.75)
             .style('fill', '#113757')
             .attr("class", "topBars");
-        
 
-    console.log(durationTop)  
+    console.log(durationTop)  ;
         //Update Functions
         $('#start, #end').click(function() {
             d3.csv('data/waveform/' + genre1Selected + '/duration.csv', function(data) {
