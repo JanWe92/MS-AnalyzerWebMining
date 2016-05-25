@@ -40,9 +40,9 @@ var wavePlot = function() {
         //Get the data for the years
         var numSongsTop = parseInt($('#numSongs1').text());
         
+        var values=_.values(data[0]);
         
-        
-        durationTop.selectAll('rect').data(data[0])
+        durationTop.selectAll('rect').data(values)
             .enter()
             .append('rect')
             .attr("x", function(d, i) { return 4 * i;})
@@ -75,7 +75,7 @@ var wavePlot = function() {
         var numSongsBottom = parseInt($('#numSongs2').text());
         
         
-        var durValues = data[0];
+        var durValues = _.values(data[0]);
         
         
         
@@ -110,7 +110,7 @@ var wavePlot = function() {
         var numSongsTop = parseInt($('#numSongs1').text());
         
         
-        var loudValues = data[0];
+        var loudValues = _.values(data[0]);
         
 
         
@@ -129,7 +129,7 @@ var wavePlot = function() {
             var numSongsTop = parseInt($('#numSongs1').text());
             d3.csv('data/waveform/' + genre1Selected  + '/loudness.csv', function(data) {
                     
-                var loudValues = data[0];
+                var loudValues = _.values(data[0]);
                 //Update all rects
                         loudnessTop.selectAll("rect")
                                 .data(loudValues)
@@ -146,7 +146,7 @@ var wavePlot = function() {
     d3.csv('data/waveform/' + genre2Selected + '/loudness.csv', function(data) {
         var numSongsBottom = parseInt($('#numSongs2').text());
         
-        var loudValues = data[0];
+        var loudValues = _.values(data[0]);
         
 
         
@@ -166,7 +166,7 @@ var wavePlot = function() {
             d3.csv('data/waveform/' + genre2Selected + '/loudness.csv', function(data) {
                 var bottomYear = $('#bottomCurrent').text();
 
-                var loudValues = data[0];
+                var loudValues = _.values(data[0]);
                 //Update all rects
                         loudnessBottom.selectAll("rect")
                                 .data(loudValues)
@@ -182,7 +182,7 @@ var wavePlot = function() {
     //Plot the tempo values for top
     d3.csv('data/waveform/' + genre1Selected + '/tempo.csv', function(data) {
         var numSongsTop = parseInt($('#numSongs1').text());
-        var tempoValues = data[0];
+        var tempoValues = _.values(data[0]);
         
         tempoTop.selectAll('bars').data(tempoValues)
             .enter()
@@ -200,7 +200,7 @@ var wavePlot = function() {
             d3.csv('data/waveform/' + genre1Selected + '/tempo.csv', function(data) {
                 
 
-                var tempoValues = data[0];
+                var tempoValues = _.values(data[0]);
                 //Update all rects
                         tempoTop.selectAll("rect")
                                 .data(tempoValues)
@@ -217,7 +217,7 @@ var wavePlot = function() {
     //Plot the tempo values for bottom
     d3.csv('data/waveform/' + genre2Selected + '/tempo.csv', function(data) {
         var numSongsBottom = parseInt($('#numSongs2').text());
-        var tempoValues = data[0];
+        var tempoValues = _.values(data[0]);
         
         tempoBottom.selectAll('bars').data(tempoValues)
             .enter()
@@ -234,7 +234,7 @@ var wavePlot = function() {
             var numSongsBottom = parseInt($('#numSongs2').text());
             d3.csv('data/waveform/'+ genre2Selected + '/tempo.csv', function(data) {
                 
-                var tempoValues = data[0];
+                var tempoValues = _.values(data[0]);
                 //Update all rects
                         tempoBottom.selectAll("rect")
                                 .data(tempoValues)
@@ -251,7 +251,7 @@ var wavePlot = function() {
     d3.csv('data/waveform/' + genre1Selected + '/hotness.csv', function(data) {
         var numSongsTop = parseInt($('#numSongs1').text());
         
-        var hotnessValues = data[0];
+        var hotnessValues = _.values(data[0]);
         
         hotnessTop.selectAll('bars').data(hotnessValues)
             .enter()
@@ -269,7 +269,7 @@ var wavePlot = function() {
             d3.csv('data/waveform/' + genre1Selected + '/hotness.csv', function(data) {
                
 
-                var hotnessValues = data[0];
+                var hotnessValues = _.values(data[0]);
                 //Update all rects
                         hotnessTop.selectAll("rect")
                                 .data(hotnessValues)
@@ -286,7 +286,7 @@ var wavePlot = function() {
     d3.csv('data/waveform/' + genre2Selected + '/hotness.csv', function(data) {
         var numSongsBottom = parseInt($('#numSongs2').text());
         
-        var hotnessValues = data[0];
+        var hotnessValues = _.values(data[0]);
         
         hotnessBottom.selectAll('bars').data(hotnessValues)
             .enter()
@@ -305,7 +305,7 @@ var wavePlot = function() {
            
 
 
-                var hotnessValues = data[0];
+                var hotnessValues = _.values(data[0]);
                 //Update all rects
                         hotnessBottom.selectAll("rect")
                                 .data(hotnessValues)
