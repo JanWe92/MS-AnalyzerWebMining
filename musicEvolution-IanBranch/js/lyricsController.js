@@ -20,31 +20,22 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 
-
 var lyricsUpdate = function(){
 
+    d3.csv("data/lyrics/" + genre1Selected +"/"+decadeForLyricsTOP+".csv", function(error, data){
     
-    d3.json("data/lyrics/" + genre1Selected +".json", function(error, data){
-    
-        
     //Empty the clouds previously made. Transition someday...
     $("#genre1cloud").empty();
     
-        
-    //Get the words
-    var topYear = $("#topCurrent").text();
-    var topLyrics = (_.findWhere(data, {year: topYear})).words;
-        
-    //Split the values for better structure
-    var keysTop = _.keys(topLyrics);
-    var valuesTop = _.values(topLyrics);
-    
-    //Build the new structure
     var wordsTop = [];
     
-    for (i = 0; i < keysTop.length; i++){
-            wordsTop.push({"text":keysTop[i], "size":valuesTop[i]});
+
+
+    for (i = 0; i < data.length; i++){
+        if(data[i].count> 8){
+            wordsTop.push({"text":data[i].word, "size":data[i].count});
                //push the words in the right number of times
+        }
             
     };
  
@@ -80,26 +71,19 @@ var lyricsUpdate = function(){
 
     });
     
-    d3.json("data/lyrics/" + genre2Selected +".json", function(error, data){
+    d3.csv("data/lyrics/" + genre2Selected +"/"+decadeForLyricsBOT+".csv", function(error, data){
     
         
     //Empty the clouds previously made. Transition someday...
     $("#genre2cloud").empty();
 
-    var bottomYear = $("#bottomCurrent").text();
-    var bottomLyrics = (_.findWhere(data, {year: bottomYear})).words;
-   
-    //Split the values for better structure
-    
-    var keysBottom = _.keys(bottomLyrics);
-    var valuesBottom = _.values(bottomLyrics);
-        
-    //Build the new structure Bottom
     var wordsBottom = [];
     
-    for (i = 0; i < keysBottom.length; i++){
-            wordsBottom.push({"text":keysBottom[i], "size":valuesBottom[i]});
+     for (i = 0; i < data.length; i++){
+        if(data[i].count> 8){
+            wordsBottom.push({"text":data[i].word, "size":data[i].count});
                //push the words in the right number of times
+           }
             
     };
  
