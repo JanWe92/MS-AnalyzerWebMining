@@ -44,8 +44,11 @@ $('#allDecadesButtonTop').click(function () {
         marginLeft: topStart + 'px',
         width: topEnd - topStart + 'px'
     });
+
+    decadeForLyricsTOP=2010;
     $('#topStart').text((topStart / 10) + 1960);
     $('#topEnd').text(Math.floor((topEnd / 10) + 1960));
+    lyricsUpdate();
 
 });
 $('#allDecadesButtonBottom').click(function () {
@@ -55,8 +58,9 @@ $('#allDecadesButtonBottom').click(function () {
         marginLeft: bottomStart + 'px',
         width: bottomEnd - bottomStart + 'px'
     });
-    // $('#topRightBound').css('left', topEnd );
+    decadeForLyricsBOT=2010;
     $('#bottomStart').text((bottomStart / 10) + 1960);
     $('#bottomEnd').text(Math.floor((bottomEnd / 10) + 1960));
+    lyricsUpdate();
 
 });
