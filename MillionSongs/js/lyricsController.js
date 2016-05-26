@@ -262,7 +262,7 @@ var lyricsUpdateRating = function () {
                             return red2;
                             break;
                         case "-1":
-                            return red1;
+                            return red3;
                             break;
                         case "1":
                             return green3;
@@ -359,7 +359,7 @@ var lyricsUpdateRating = function () {
                             return red2;
                             break;
                         case "-1":
-                            return red1;
+                            return red3;
                             break;
                         case "1":
                             return green3;
