@@ -1,7 +1,7 @@
 var previousYearTop = 0;
 var previousYearBottom = 0;
-var decadeForLyricsTOP=1960;
-var decadeForLyricsBOT=1960;
+var decadeForLyricsTOP=2010;
+var decadeForLyricsBOT=2010;
 
 $('.decade').click(function () {
     var thisId = $(this).attr('id');
