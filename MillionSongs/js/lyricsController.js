@@ -183,12 +183,12 @@ var lyricsUpdate = function () {
 //lyricsUpdate();
 
 
-var red1= "#FF0000";
-var red2= "#FF5858";
-var red3= "#FFACAC";
-var green1="#00FF15";
-var green2="#67FF50";
-var green3="#ABFF9E";
+var red1 = "#FF0000";
+var red2 = "#FF5858";
+var red3 = "#FFACAC";
+var green1 = "#00FF15";
+var green2 = "#67FF50";
+var green3 = "#ABFF9E";
 var lyricsUpdateRating = function () {
 
     d3.csv("data/ratedLyrics/" + genre1Selected + "/" + decadeForLyricsTOP + ".csv", function (error, data) {
@@ -209,13 +209,14 @@ var lyricsUpdateRating = function () {
             }
 
         };
+        console.log(wordsTop);
         //get max word count
         if (typeof wordsTop[0] != "undefined") {
 
             var max = wordsTop[0].size;
             var x = 1;
             if (max < 60) {
-                x = 2;
+                x = 8;
             } else if (max > 130) {
                 x = 0.5;
             }
@@ -254,7 +255,7 @@ var lyricsUpdateRating = function () {
                 })
                 .style("font-family", "Impact")
                 .style("fill", function (d, i) {
-                    switch(data[i].rating) {
+                    switch (data[i].rating) {
                         case "-3":
                             return red1;
                             break;
@@ -306,13 +307,13 @@ var lyricsUpdateRating = function () {
             }
 
         };
+
         //get max word count
         if (typeof wordsBottom[0] != "undefined") {
-
             var max = wordsBottom[0].size;
             var x = 1;
             if (max < 60) {
-                x = 2;
+                x = 8;
             } else if (max > 130) {
                 x = 0.5;
             }
@@ -351,7 +352,7 @@ var lyricsUpdateRating = function () {
                 })
                 .style("font-family", "Impact")
                 .style("fill", function (d, i) {
-                    switch(data[i].rating) {
+                    switch (data[i].rating) {
                         case "-3":
                             return red1;
                             break;
@@ -390,4 +391,25 @@ var lyricsUpdateRating = function () {
 
 };
 
-lyricsUpdateRating();
+
+console.log("debug");
+var changeLyrics = function () {
+    if ($('#changeLyricDisplay').text() == "Display Weighted Attributes") {
+        lyricsUpdate();
+    } else {
+        lyricsUpdateRating();
+    }
+
+};
+
+changeLyrics();
+$('#changeLyricDisplay').click(function () {
+    if ($('#changeLyricDisplay').text() == "Display Weighted Attributes") {
+        $('#changeLyricDisplay').text("Display Lyrics");
+    } else {
+        $('#changeLyricDisplay').text("Display Weighted Attributes");
+    }
+
+    changeLyrics();
+
+});

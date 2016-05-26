@@ -34,7 +34,7 @@ $('.decade').click(function () {
         $('#bottomStart').text((bottomStart / 10) + 1960);
         $('#bottomEnd').text(Math.floor((bottomEnd / 10) + 1960));
     };
-    lyricsUpdate();
+    changeLyrics();
 });
 
 $('#allDecadesButtonTop').click(function () {
