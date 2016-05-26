@@ -23,7 +23,7 @@ $('#genre1').change(function () {
         overTimeUpdate();
     };
     if (typeof lyricsUpdate == 'function') {
-        lyricsUpdate();
+        changeLyrics();
     };
     setCurrentGenre("genre1");
     overtimeGraphs();
@@ -50,7 +50,7 @@ $('#genre2').change(function () {
         overTimeUpdate();
     };
     if (typeof lyricsUpdate == 'function') {
-        lyricsUpdate();
+        changeLyrics();
     };
     setCurrentGenre("genre2");
     overtimeGraphs();
