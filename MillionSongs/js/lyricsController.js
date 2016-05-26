@@ -180,4 +180,214 @@ var lyricsUpdate = function () {
 
 };
 
-lyricsUpdate();
+//lyricsUpdate();
+
+
+var red1= "#FF0000";
+var red2= "#FF5858";
+var red3= "#FFACAC";
+var green1="#00FF15";
+var green2="#67FF50";
+var green3="#ABFF9E";
+var lyricsUpdateRating = function () {
+
+    d3.csv("data/ratedLyrics/" + genre1Selected + "/" + decadeForLyricsTOP + ".csv", function (error, data) {
+
+        //Empty the clouds previously made. Transition someday...
+        $("#genre1cloud").empty();
+
+        var wordsTop = [];
+
+        for (i = 0; i < data.length; i++) {
+            if (data[i].count > 2) {
+                wordsTop.push({
+                    "text": data[i].word,
+                    "size": data[i].count,
+                    "rating": data[i].rating
+                });
+                //push the words in the right number of times
+            }
+
+        };
+        //get max word count
+        if (typeof wordsTop[0] != "undefined") {
+
+            var max = wordsTop[0].size;
+            var x = 1;
+            if (max < 60) {
+                x = 2;
+            } else if (max > 130) {
+                x = 0.5;
+            }
+        }
+
+        var fill = d3.scale.category20();
+        d3.layout.cloud().size([350, 500])
+            .words(wordsTop.map(function (d) {
+                return {
+                    text: d.text,
+                    size: d.size
+                };
+            }))
+            .padding(5)
+            .rotate(function () {
+                return ~~(Math.random() * 1) * 90;
+            })
+            .font("Impact")
+            .fontSize(function (d) {
+                return ((d.size) * x);
+            })
+            .on("end", draw)
+            .start();
+
+        function draw(words) {
+            d3.select("#genre1cloud").append("svg")
+                .attr("width", 350)
+                .attr("height", 500)
+                .append("g")
+                .attr("transform", "translate(170,260)")
+                .selectAll("text")
+                .data(words)
+                .enter().append("text")
+                .style("font-size", function (d) {
+                    return d.size + "px";
+                })
+                .style("font-family", "Impact")
+                .style("fill", function (d, i) {
+                    switch(data[i].rating) {
+                        case "-3":
+                            return red1;
+                            break;
+                        case "-2":
+                            return red2;
+                            break;
+                        case "-1":
+                            return red1;
+                            break;
+                        case "1":
+                            return green3;
+                            break;
+                        case "2":
+                            return green2;
+                            break;
+                        case "3":
+                            return green1;
+                            break;
+                        default:
+                            return green1;
+                    }
+                })
+                .attr("text-anchor", "middle")
+                .attr("transform", function (d) {
+                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                })
+                .text(function (d) {
+                    return d.text;
+                });
+        }
+
+    });
+
+    d3.csv("data/ratedLyrics/" + genre2Selected + "/" + decadeForLyricsBOT + ".csv", function (error, data) {
+
+
+        //Empty the clouds previously made. Transition someday...
+        $("#genre2cloud").empty();
+
+        var wordsBottom = [];
+
+        for (i = 0; i < data.length; i++) {
+            if (data[i].count > 2) {
+                wordsBottom.push({
+                    "text": data[i].word,
+                    "size": data[i].count
+                });
+                //push the words in the right number of times
+            }
+
+        };
+        //get max word count
+        if (typeof wordsBottom[0] != "undefined") {
+
+            var max = wordsBottom[0].size;
+            var x = 1;
+            if (max < 60) {
+                x = 2;
+            } else if (max > 130) {
+                x = 0.5;
+            }
+        }
+        var fill = d3.scale.category20();
+
+        d3.layout.cloud().size([350, 500])
+            .words(wordsBottom.map(function (d) {
+                return {
+                    text: d.text,
+                    size: d.size
+                };
+            }))
+            .padding(5)
+            .rotate(function () {
+                return ~~(Math.random() * 1) * 90;
+            })
+            .font("Impact")
+            .fontSize(function (d) {
+                return ((d.size) * x);
+            })
+            .on("end", draw)
+            .start();
+
+        function draw(words) {
+            d3.select("#genre2cloud").append("svg")
+                .attr("width", 350)
+                .attr("height", 500)
+                .append("g")
+                .attr("transform", "translate(170,260)")
+                .selectAll("text")
+                .data(words)
+                .enter().append("text")
+                .style("font-size", function (d) {
+                    return d.size + "px";
+                })
+                .style("font-family", "Impact")
+                .style("fill", function (d, i) {
+                    switch(data[i].rating) {
+                        case "-3":
+                            return red1;
+                            break;
+                        case "-2":
+                            return red2;
+                            break;
+                        case "-1":
+                            return red1;
+                            break;
+                        case "1":
+                            return green3;
+                            break;
+                        case "2":
+                            return green2;
+                            break;
+                        case "3":
+                            return green1;
+                            break;
+                        default:
+                            return green1;
+                    }
+                })
+                .attr("text-anchor", "middle")
+                .attr("transform", function (d) {
+                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                })
+                .text(function (d) {
+                    return d.text;
+                });
+        }
+
+
+
+
+    });
+
+};
+
+lyricsUpdateRating();
