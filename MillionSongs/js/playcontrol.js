@@ -48,7 +48,7 @@ $('#allDecadesButtonTop').click(function () {
     decadeForLyricsTOP=2010;
     $('#topStart').text((topStart / 10) + 1960);
     $('#topEnd').text(Math.floor((topEnd / 10) + 1960));
-    lyricsUpdate();
+    changeLyrics();
 
 });
 $('#allDecadesButtonBottom').click(function () {
@@ -61,6 +61,6 @@ $('#allDecadesButtonBottom').click(function () {
     decadeForLyricsBOT=2010;
     $('#bottomStart').text((bottomStart / 10) + 1960);
     $('#bottomEnd').text(Math.floor((bottomEnd / 10) + 1960));
-    lyricsUpdate();
+    changeLyrics();
 
 });
