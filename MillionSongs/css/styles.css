@@ -139,7 +139,7 @@ select {
 #rangeContainer {
     position: relative;
     margin-left: 560px;
-    margin-top: 20px;
+    margin-top: 14px;
     display: inline-block;
 }
 #topRangeText {
@@ -303,4 +303,11 @@ td {
     margin-top: 15px;
     margin-left: 0px;
     margin-right: 0px;
+}
+
+#error{
+    padding-top: 20rem;
+    padding-left: 20rem;
+    font-size: 20px;
+    color: red;
 }

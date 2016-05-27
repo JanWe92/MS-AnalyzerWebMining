@@ -5,24 +5,19 @@ var genre2Selected = "Pop and Rock";
 $('#genre1').change(function () {
     newGenre = $('#genre1').val();
     genre1Selected = newGenre;
-
-
     getData();
+
     if (typeof waveUpdate == 'function') {
 
         waveUpdate();
     };
-    if (typeof treemapPlot == 'function') {
 
-        treemapPlot();
-    };
-    if (typeof mapDotsUpdate == 'function') {
-        mapDotsUpdate();
-    };
     if (typeof overTimeUpdate == 'function') {
+
         overTimeUpdate();
     };
     if (typeof lyricsUpdate == 'function') {
+
         changeLyrics();
     };
     setCurrentGenre("genre1");
@@ -39,17 +34,13 @@ $('#genre2').change(function () {
 
         waveUpdate();
     };
-    if (typeof treemapPlot == 'function') {
 
-        treemapPlot();
-    };
-    if (typeof mapDotsUpdate == 'function') {
-        mapDotsUpdate();
-    };
     if (typeof overTimeUpdate == 'function') {
+
         overTimeUpdate();
     };
     if (typeof lyricsUpdate == 'function') {
+
         changeLyrics();
     };
     setCurrentGenre("genre2");

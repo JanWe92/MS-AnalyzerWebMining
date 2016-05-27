@@ -18,9 +18,6 @@
            pad = 20,
            left_pad = 100;
 
-
-
-
        //left attribute
        var attributeSelect1 = $("#attribut1 option:selected").text();
        //bottom attribute

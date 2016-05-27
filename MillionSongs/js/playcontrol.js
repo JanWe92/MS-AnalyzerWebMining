@@ -1,7 +1,7 @@
 var previousYearTop = 0;
 var previousYearBottom = 0;
-var decadeForLyricsTOP=2010;
-var decadeForLyricsBOT=2010;
+var decadeForLyricsTOP = 2010;
+var decadeForLyricsBOT = 2010;
 
 $('.decade').click(function () {
     var thisId = $(this).attr('id');
@@ -9,7 +9,7 @@ $('.decade').click(function () {
     var tOrB = thisId.slice(5);
 
     if (tOrB == 'Top') {
-        decadeForLyricsTOP=decade;
+        decadeForLyricsTOP = decade;
         topStart = ((decade - 1960) * 10);
         topEnd = topStart + 99;
         //$('#topLeftBound').css('left', topStart ); 
@@ -22,7 +22,7 @@ $('.decade').click(function () {
         $('#topEnd').text(Math.floor((topEnd / 10) + 1960));
     } else {
 
-        decadeForLyricsBOT=decade;
+        decadeForLyricsBOT = decade;
         bottomStart = ((decade - 1960) * 10);
         bottomEnd = bottomStart + 99;
         //$('#bottomLeftBound').css('left', bottomStart ); 
@@ -45,7 +45,7 @@ $('#allDecadesButtonTop').click(function () {
         width: topEnd - topStart + 'px'
     });
 
-    decadeForLyricsTOP=2010;
+    decadeForLyricsTOP = 2010;
     $('#topStart').text((topStart / 10) + 1960);
     $('#topEnd').text(Math.floor((topEnd / 10) + 1960));
     changeLyrics();
@@ -58,7 +58,7 @@ $('#allDecadesButtonBottom').click(function () {
         marginLeft: bottomStart + 'px',
         width: bottomEnd - bottomStart + 'px'
     });
-    decadeForLyricsBOT=2010;
+    decadeForLyricsBOT = 2010;
     $('#bottomStart').text((bottomStart / 10) + 1960);
     $('#bottomEnd').text(Math.floor((bottomEnd / 10) + 1960));
     changeLyrics();

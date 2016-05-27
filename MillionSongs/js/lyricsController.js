@@ -29,8 +29,6 @@ var lyricsUpdate = function () {
 
         var wordsTop = [];
 
-
-
         for (i = 0; i < data.length; i++) {
             if (data[i].count > 8) {
                 wordsTop.push({
@@ -100,7 +98,6 @@ var lyricsUpdate = function () {
     });
 
     d3.csv("data/lyrics/" + genre2Selected + "/" + decadeForLyricsBOT + ".csv", function (error, data) {
-
 
         //Empty the clouds previously made. Transition someday...
         $("#genre2cloud").empty();
@@ -172,10 +169,6 @@ var lyricsUpdate = function () {
                     return d.text;
                 });
         }
-
-
-
-
     });
 
 };
@@ -286,7 +279,6 @@ var lyricsUpdateRating = function () {
                     return d.text;
                 });
         }
-
     });
 
     d3.csv("data/ratedLyrics/" + genre2Selected + "/" + decadeForLyricsBOT + ".csv", function (error, data) {
@@ -305,7 +297,6 @@ var lyricsUpdateRating = function () {
                 });
                 //push the words in the right number of times
             }
-
         };
 
         //get max word count
@@ -383,16 +374,10 @@ var lyricsUpdateRating = function () {
                     return d.text;
                 });
         }
-
-
-
-
     });
 
 };
 
-
-console.log("debug");
 var changeLyrics = function () {
     if ($('#changeLyricDisplay').text() == "Display Weighted Attributes") {
         lyricsUpdate();
@@ -403,6 +388,7 @@ var changeLyrics = function () {
 };
 
 changeLyrics();
+
 $('#changeLyricDisplay').click(function () {
     if ($('#changeLyricDisplay').text() == "Display Weighted Attributes") {
         $('#changeLyricDisplay').text("Display Lyrics");

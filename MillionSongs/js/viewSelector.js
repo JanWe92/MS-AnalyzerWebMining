@@ -4,9 +4,6 @@ infovisApp.controller('viewController', function ($scope) {
         $scope.getPartial = function () {
             return "'partial/waveform.html'";
         };
-        console.log("got Here");
-
-
     };
 });
 
@@ -16,21 +13,27 @@ $('#viewSelect1').change(function () {
 
     var viewSelect = $('#view1');
     displayControl();
-    console.log(valSelected);
+
+    var valSelectedOther = $("#viewSelect2 option:selected").text();
     if (valSelected == "Waveform") {
-        viewSelect.load("partial/waveform.html");
-    } else if (valSelected == "Location") {
-        viewSelect.load("partial/location.html");
-        console.log('sent ' + valSelected);
+        if (valSelectedOther != "Waveform") {
+            viewSelect.load("partial/waveform.html");
+        } else {
+            viewSelect.load("partial/home.html");
+        }
+
     } else if (valSelected == "Lyrics") {
-        viewSelect.load("partial/lyrics.html");
-        console.log('sent ' + valSelected);
-    } else if (valSelected == "Subgenres") {
-        viewSelect.load("partial/subgenres.html");
-        console.log('sent ' + valSelected);
+        if (valSelectedOther != "Lyrics") {
+            viewSelect.load("partial/lyrics.html");
+            console.log('sent ' + valSelected);
+        }
     } else if (valSelected == "Attributes") {
-        viewSelect.load("partial/overTime.html");
-        console.log('sent ' + valSelected);
+        if (valSelectedOther != "Attributes") {
+            viewSelect.load("partial/overTime.html");
+            console.log('sent ' + valSelected);
+        } else {
+            viewSelect.load("partial/home.html");
+        }
     };
 });
 
@@ -38,21 +41,28 @@ $('#viewSelect2').change(function () {
     var valSelected = $("#viewSelect2 option:selected").text();
     var viewSelect = $('#view2');
     displayControl();
-    console.log(valSelected);
+    var valSelectedOther = $("#viewSelect1 option:selected").text();
     if (valSelected == "Waveform") {
-        viewSelect.load("partial/waveform.html");
-    } else if (valSelected == "Location") {
-        viewSelect.load("partial/location.html");
-        console.log('sent ' + valSelected);
+        if (valSelectedOther != "Waveform") {
+            viewSelect.load("partial/waveform.html");
+        } else {
+            viewSelect.load("partial/home.html");
+        }
+
     } else if (valSelected == "Lyrics") {
-        viewSelect.load("partial/lyrics.html");
-        console.log('sent ' + valSelected);
-    } else if (valSelected == "Subgenres") {
-        viewSelect.load("partial/subgenres.html");
-        console.log('sent ' + valSelected);
+        if (valSelectedOther != "Lyrics") {
+            viewSelect.load("partial/lyrics.html");
+            console.log('sent ' + valSelected);
+        } else {
+            viewSelect.load("partial/home.html");
+        }
     } else if (valSelected == "Attributes") {
-        viewSelect.load("partial/overTime.html");
-        console.log('sent ' + valSelected);
+        if (valSelectedOther != "Attributes") {
+            viewSelect.load("partial/overTime.html");
+            console.log('sent ' + valSelected);
+        } else {
+            viewSelect.load("partial/home.html");
+        }
     };
 });
 

@@ -15,22 +15,10 @@
 				templateUrl : 'partial/meta.html',
 				controller  : 'metaController'
 			})
-
-			// schedule page
-			.when('/location', {
-				templateUrl : 'partial/location.html',
-				controller  : 'locationController'
-			})
         
             // applications main page
 			.when('/lyrics', {
 				templateUrl : 'partial/lyrics.html',
 				controller  : 'lyricsController'
 			})
-        
-            // settings page
-			.when('/subgenres', {
-				templateUrl : 'partial/subgenres.html',
-				controller  : 'subgenresController'
-			});
 	});
